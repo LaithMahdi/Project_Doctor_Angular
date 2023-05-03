@@ -1,15 +1,21 @@
 <div class="container mt-5">
     <div class="card shadow mb-4">
         <div class="card-body">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Liste de Doctors</th>
-                    </tr>
-                </thead>
+            <table class="table table-striped">
+                <tr>
+                    <th>ID</th>
+                    <th>Name Doctor</th>
+                    <th>Age Doctor</th>
+                    <th>Service Doctor</th>
+                    <th>Date Of Recruitment</th>
+                </tr>
                 <tbody *ngFor="let doctor of doctors">
                     <tr>
-                        <td>{{doctor}}</td>
+                        <td>{{doctor.idDoctor}}</td>
+                        <td>{{doctor.nameDoctor}}</td>
+                        <td>{{doctor.ageDoctor}}</td>
+                        <td>{{doctor.serviceDoctor}}</td>
+                        <td>{{doctor.dateDoctor | date:'dd/MM/yyyy'}}</td>
                     </tr>
                 </tbody>
             </table>

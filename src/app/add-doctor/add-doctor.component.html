@@ -1,1 +1,33 @@
-<p>add-doctor works!</p>
+<div class="container mt-5">
+    <div>
+        <h2>Ajouter un Doctor :</h2>
+    </div>
+    <form>
+        <div class="col-sm-2 col-md-2 col-lg-2">
+            <label>ID Doctor</label>
+            <input type="text" [(ngModel)]="newDoctor.idDoctor" name="idDoctor" class="form-control">
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+            <label>Nom Doctor</label>
+            <input type="text" [(ngModel)]="newDoctor.nameDoctor" name="nameDoctor" class="form-control w-100">
+        </div>
+        <div class="col-sm-2 col-md-2 col-lg-2">
+            <label>Age Doctor</label>
+            <input type="number" [(ngModel)]="newDoctor.ageDoctor" name="ageDoctor" class="form-control">
+        </div>
+        <div class="col-sm-2 col-md-2 col-lg-2">
+            <label>Service Doctor</label>
+            <input type="text" [(ngModel)]="newDoctor.serviceDoctor" name="serviceDoctor" class="form-control">
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+            <label>Date création</label>
+            <input type="date" [(ngModel)]="newDoctor.dateDoctor" name="dateDoctor" class="form-control">
+        </div>
+        <div class="mt-2">
+            <button type="submit" (click)="addDoctor()" class="btn btn-success">Ajouter</button>
+        </div>
+        <div class="alert alert-success mt-3" role="alert">
+            <h5>{{message}}</h5>
+        </div>
+    </form>
+</div>
