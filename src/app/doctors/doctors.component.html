@@ -8,6 +8,7 @@
                     <th>Age Doctor</th>
                     <th>Service Doctor</th>
                     <th>Date Of Recruitment</th>
+                    <th colspan="2">Actions</th>
                 </tr>
                 <tbody *ngFor="let doctor of doctors">
                     <tr>
@@ -16,6 +17,8 @@
                         <td>{{doctor.ageDoctor}}</td>
                         <td>{{doctor.serviceDoctor}}</td>
                         <td>{{doctor.dateDoctor | date:'dd/MM/yyyy'}}</td>
+                        <td><a class="btn btn-danger" (click)="supprimerDoctor(doctor)">Supprimer</a></td>
+                        <td><a class="btn btn-success" [routerLink]="['/updateDoctor',doctor.idDoctor]">Modifier</a></td>
                     </tr>
                 </tbody>
             </table>

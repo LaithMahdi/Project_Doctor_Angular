@@ -1,5 +1,5 @@
 export class Doctor{
-    idDoctor?:number;
+    idDoctor!:number;
     nameDoctor?:string;
     ageDoctor? : number;
     serviceDoctor?:string;

@@ -1,0 +1,31 @@
+<div class="container mt-2">
+    <div>
+        <h2>Modifier un Doctor :</h2>
+    </div>
+    <form>
+        <div class="col-sm-2 col-md-2 col-lg-2" hidden>
+            <label>ID Doctor</label>
+            <input type="text" [(ngModel)]="currentDoctor.idDoctor" name="idDoctor" class="form-control">
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+            <label>Name Doctor</label>
+            <input type="text" [(ngModel)]="currentDoctor.nameDoctor" name="nameDoctor" class="form-control">
+        </div>
+        <div class="col-sm-2 col-md-2 col-lg-2">
+            <label>Age Doctor</label>
+            <input type="number" [(ngModel)]="currentDoctor.ageDoctor" name="ageDoctor" class="form-control">
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+            <label>Service Doctor</label>
+            <input type="text" [(ngModel)]="currentDoctor.serviceDoctor" name="serviceDoctor" class="form-control">
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+            <label>Date Of Recruitment</label>
+            <input type="date" [ngModel]="currentDoctor.dateDoctor | date: 'yyyy-MM-dd'"
+                (ngModelChange)=" currentDoctor.dateDoctor= $event" name="dateDoctor" class="form-control">
+        </div>
+        <div class="mt-3">
+            <button type="submit" (click)=" updateDoctor()" class="btn btn-success">Modifer</button>
+        </div>
+    </form>
+</div>

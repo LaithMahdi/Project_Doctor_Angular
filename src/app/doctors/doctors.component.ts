@@ -17,6 +17,14 @@ export class DoctorsComponent implements OnInit{
     this.doctors=this.doctorService.listeDoctors();
   }
 
+  supprimerDoctor(d: Doctor)
+  {
+    //console.log(d);
+    let conf = confirm("Etes-vous sûr ?");
+    if (conf)
+      this.doctorService.supprimerDoctor(d);
+  }
+
   
 
 }
