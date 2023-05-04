@@ -24,6 +24,15 @@
             <input type="date" [ngModel]="currentDoctor.dateDoctor | date: 'yyyy-MM-dd'"
                 (ngModelChange)=" currentDoctor.dateDoctor= $event" name="dateDoctor" class="form-control">
         </div>
+        <!-- <div class="col-sm-4 col-md-4 col-lg-4">
+            <label>Hospital</label>
+            <select class="form-control form-control-lg" id="idHospital" name="idHospital" [(ngModel)]="updateHosId">
+                <option *ngFor="let hos of hospitals" [value]="hos.idHospital">
+                    {{hos.nomHospital}}
+                </option>
+            </select>
+        </div> -->
+            
         <div class="mt-3">
             <button type="submit" (click)=" updateDoctor()" class="btn btn-success">Modifer</button>
         </div>

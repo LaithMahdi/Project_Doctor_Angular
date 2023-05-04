@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Doctor } from '../model/doctor.model';
 import { DoctorService } from '../services/doctor.service';
+import { Hospital } from '../model/hospital.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-doctor',
@@ -8,18 +10,22 @@ import { DoctorService } from '../services/doctor.service';
 })
 export class AddDoctorComponent implements OnInit{
   newDoctor= new Doctor();
-  message!:string;
-  constructor(private doctorService:DoctorService){
+  hospitals! : Hospital[];
+  newHospital! : Hospital;
+  newIdHos!:number;
+  constructor(private doctorService:DoctorService,private router :Router){
 
   }
 
   ngOnInit(): void {
+    //this.hospitals=this.doctorService.listeHospitals();
   }
 
   addDoctor(){
-    //console.log(this.newDoctor);
+    //this.newHospital=this.doctorService.consulterHospital(this.newIdHos);
+    this.newDoctor.hospital=this.newHospital;
     this.doctorService.ajouterDoctor(this.newDoctor);
-    this.message="Doctor "+this.newDoctor.nameDoctor+" added with succefully";
+    this.router.navigate(['doctors']);
   }
     
 }

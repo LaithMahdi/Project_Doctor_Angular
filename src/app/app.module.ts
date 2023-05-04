@@ -7,6 +7,7 @@ import { DoctorsComponent } from './doctors/doctors.component';
 import { AddDoctorComponent } from './add-doctor/add-doctor.component';
 import { FormsModule } from '@angular/forms';
 import { UpdateDoctorComponent } from './update-doctor/update-doctor.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { UpdateDoctorComponent } from './update-doctor/update-doctor.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

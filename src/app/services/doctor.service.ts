@@ -1,22 +1,38 @@
 import { Injectable } from '@angular/core';
 import { Doctor } from '../model/doctor.model';
+import { Hospital } from '../model/hospital.model';
+import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+const httpOptions = {
+  headers: new HttpHeaders( {'Content-Type': 'application/json'} )
+};
+  
 @Injectable({
   providedIn: 'root'
 })
 export class DoctorService {
-  doctors : Doctor[]; //un tableau de doctor
+  apiURL: string = 'http://localhost:8083/doctors_demo/api';
 
-  constructor() {
-    this.doctors=[
-      {idDoctor:1,nameDoctor:"Rayen Troudi",ageDoctor:27,serviceDoctor:"pédiatre", dateDoctor: new Date("04/27/2023")},
-      {idDoctor:2,nameDoctor:"Youssef khriti",ageDoctor:34,serviceDoctor:"psychologue", dateDoctor: new Date("04/20/2023")},
-      {idDoctor:3,nameDoctor:"Koussay Rachidi",ageDoctor:27,serviceDoctor:"chirurgien", dateDoctor: new Date("01/27/2023")},
-    ];
+  doctors! : Doctor[]; //un tableau de doctor
+  //hospitals:Hospital[];
+
+  constructor(private http : HttpClient) {
+    // this.hospitals=[
+    //   {idHospital:1,nomHospital:"Aziza Othmana",typeHospital:"University hospital",adresseHospital:"Tunis Governorate",dateCreation:new Date()},
+    //   {idHospital:2,nomHospital:"Taher Maamouri",typeHospital:"Regional",adresseHospital:"Nabeul Governorate, Mrezga",dateCreation:new Date()},
+    // ];
+    // this.doctors=[
+    //   {idDoctor:1,nameDoctor:"Rayen Troudi",ageDoctor:27,serviceDoctor:"pédiatre", dateDoctor: new Date("04/27/2023"),hospital:{idHospital:1,nomHospital:"Aziza Othmana",typeHospital:"University hospital",adresseHospital:"Tunis Governorate",dateCreation:new Date()},},
+    //   {idDoctor:2,nameDoctor:"Youssef khriti",ageDoctor:34,serviceDoctor:"psychologue", dateDoctor: new Date("04/20/2023"),
+    //   hospital:{idHospital:2,nomHospital:"Taher Maamouri",typeHospital:"Regional",adresseHospital:"Nabeul Governorate, Mrezga",dateCreation:new Date()},
+    // },
+    //   {idDoctor:3,nameDoctor:"Koussay Rachidi",ageDoctor:27,serviceDoctor:"chirurgien", dateDoctor: new Date("01/27/2023"),hospital:{idHospital:1,nomHospital:"Aziza Othmana",typeHospital:"University hospital",adresseHospital:"Tunis Governorate",dateCreation:new Date()},},
+    // ];
    }
 
-  listeDoctors():Doctor[] {
-    return this.doctors;
+  listeDoctors():Observable<Doctor[]> {
+    return this.http.get<Doctor[]>(this.apiURL);
   }
 
   ajouterDoctor(doctor: Doctor){
@@ -29,12 +45,6 @@ export class DoctorService {
     if (index > -1) {
       this.doctors.splice(index,1);
     }
-    //ou Bien
-    /* this.produits.forEach((cur, index) => {
-    if(prod.idProduit === cur.idProduit) {
-    this.produits.splice(index, 1);
-    }
-    }); */
   }
 
   consulterDoctor(id:number): Doctor{
@@ -45,6 +55,7 @@ export class DoctorService {
   {
     this.supprimerDoctor(doctor);
     this.ajouterDoctor(doctor);
+    this.trierDoctors();
   }
 
 
@@ -59,4 +70,11 @@ export class DoctorService {
       return 0;
     });  
   }
+
+  // listeHospitals():Hospital[] {
+  //   return this.hospitals;
+  // }
+  // consulterHospital(id:number): Hospital{
+  //   return this.hospitals.find(hos=>hos.idHospital==id)!;
+  // }
 }

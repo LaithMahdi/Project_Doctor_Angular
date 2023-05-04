@@ -14,7 +14,10 @@ export class DoctorsComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.doctors=this.doctorService.listeDoctors();
+    this.doctorService.listeDoctors().subscribe(docs=>{
+      //console.log(docs);
+      this.doctors=docs;
+    });      
   }
 
   supprimerDoctor(d: Doctor)
