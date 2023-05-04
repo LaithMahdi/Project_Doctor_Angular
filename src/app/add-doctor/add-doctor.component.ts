@@ -20,12 +20,16 @@ export class AddDoctorComponent implements OnInit{
   ngOnInit(): void {
     //this.hospitals=this.doctorService.listeHospitals();
   }
-
+  
   addDoctor(){
     //this.newHospital=this.doctorService.consulterHospital(this.newIdHos);
-    this.newDoctor.hospital=this.newHospital;
-    this.doctorService.ajouterDoctor(this.newDoctor);
-    this.router.navigate(['doctors']);
+    // this.newDoctor.hospital=this.newHospital;
+    // this.doctorService.ajouterDoctor(this.newDoctor);
+    // this.router.navigate(['doctors']);
+    this.doctorService.ajouterDoctor(this.newDoctor).subscribe(doctor=>{
+      console.log(doctor);
+      this.router.navigate(['doctors']);
+    });
   }
     
 }

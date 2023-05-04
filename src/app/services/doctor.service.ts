@@ -12,7 +12,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class DoctorService {
-  apiURL: string = 'http://localhost:8083/doctors_demo/api';
+  apiURL: string = 'http://localhost:8080/doctors_demo/api';
 
   doctors! : Doctor[]; //un tableau de doctor
   //hospitals:Hospital[];
@@ -34,15 +34,15 @@ export class DoctorService {
   listeDoctors():Observable<Doctor[]> {
     return this.http.get<Doctor[]>(this.apiURL);
   }
-
-  ajouterDoctor(doctor: Doctor){
-    this.doctors.push(doctor);
+  
+  ajouterDoctor(doctor: Doctor):Observable<Doctor>{
+    return this.http.post<Doctor>(this.apiURL, doctor, httpOptions);  
   }
 
   supprimerDoctor(doctor: Doctor){
     //supprimer le produit prod du tableau produits
     const index = this.doctors.indexOf(doctor, 0);
-    if (index > -1) {
+    if (index > -1) { 
       this.doctors.splice(index,1);
     }
   }
@@ -62,12 +62,12 @@ export class DoctorService {
   trierDoctors(){
     this.doctors = this.doctors.sort((n1,n2) => {
       if (n1.idDoctor > n2.idDoctor) {
-      return 1;
+        return 1;
       }
       if (n1.idDoctor < n2.idDoctor) {
-      return -1;
+        return -1;
       }
-      return 0;
+        return 0;
     });  
   }
 
