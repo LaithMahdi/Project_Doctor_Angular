@@ -3,7 +3,7 @@
         <h2>Ajouter un Doctor :</h2>
     </div>
     <form>
-        <div class="col-sm-2 col-md-2 col-lg-2">
+        <div class="col-sm-2 col-md-2 col-lg-2" hidden>
             <label>ID Doctor</label>
             <input type="text" [(ngModel)]="newDoctor.idDoctor" name="idDoctor" class="form-control">
         </div>
@@ -23,14 +23,14 @@
             <label>Date Of Recruitment</label>
             <input type="date" [(ngModel)]="newDoctor.dateDoctor" name="dateDoctor" class="form-control">
         </div>
-        <!-- <div class="col-sm-4 col-md-4 col-lg-4">
+        <div class="col-sm-4 col-md-4 col-lg-4">
             <label>Hospital</label>
             <select class="form-control form-control-lg" id="idHospital" name="idHospital" [(ngModel)]="newIdHos">
                 <option *ngFor="let hos of hospitals" [value]="hos.idHospital">
-                    {{hos.nomHospital}}
+                    {{hos.nameHospital}}
                 </option>
             </select>
-        </div> -->
+        </div> 
         <div class="mt-2">
             <button type="submit" (click)="addDoctor()" class="btn btn-success">Ajouter</button>
         </div>

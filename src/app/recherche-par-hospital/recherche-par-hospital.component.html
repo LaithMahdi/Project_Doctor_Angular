@@ -1,4 +1,16 @@
 <div class="container mt-5">
+    <div class="col-sm-4 col-md-4 col-lg-4 mb-4">
+        <label>Hospitals</label>
+        <select class="form-control form-control-lg" id="idHospital" name="idHospital" [(ngModel)]="IdHos"
+            (change)="onChange()">
+            <option *ngFor="let hop of hospitals" value="{{hop.idHospital}}">
+                {{hop.nameHospital}}
+            </option>
+        </select>
+    </div>
+        
+
+
     <div class="card shadow mb-4">
         <div class="card-body">
             <table class="table table-striped">
@@ -9,7 +21,7 @@
                     <th>Service Doctor</th>
                     <th>Date Of Recruitment</th>
                     <th>Hospital</th>
-                    <th colspan="2">Actions</th>
+                    <!--<th colspan="2">Actions</th>-->
                 </tr>
                 <tbody *ngFor="let doctor of doctors">
                     <tr>
@@ -19,8 +31,8 @@
                         <td>{{doctor.serviceDoctor}}</td>
                         <td>{{doctor.dateDoctor | date:'dd/MM/yyyy'}}</td>
                         <td>{{doctor.hospital!.nameHospital}}</td> 
-                        <td><a class="btn btn-danger" (click)="supprimerDoctor(doctor)">Supprimer</a></td>
-                        <td><a class="btn btn-success" [routerLink]="['/updateDoctor',doctor.idDoctor]">Modifier</a></td>
+                        <!-- <td><a class="btn btn-danger" (click)="supprimerDoctor(doctor)">Supprimer</a></td>
+                        <td><a class="btn btn-success" [routerLink]="['/updateDoctor',doctor.idDoctor]">Modifier</a></td> -->
                     </tr>
                 </tbody>
             </table>

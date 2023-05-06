@@ -21,16 +21,23 @@ export class UpdateDoctorComponent implements OnInit{
     ){}
 
   ngOnInit(): void {
-    //this.hospitals=this.doctorService.listeHospitals();
-    this.currentDoctor=this.doctorService.consulterDoctor(this.activatedRoute.snapshot.params["id"]);
-    this.updateHosId=this.currentDoctor.hospital.idHospital;
+    this.doctorService.listeHospitals().subscribe(hosps => {this.hospitals = hosps._embedded.hospitals;
+    console.log(hosps);
+    });
+    this.doctorService.consulterDoctor(this.activatedRoute.snapshot.params['id']).subscribe( 
+      doc =>{ this.currentDoctor = doc;
+        this.updateHosId=this.currentDoctor.hospital.idHospital;
+    }) ;
+    console.log("ID HOS "+this.updateHosId);
   }
 
   updateDoctor()
   { 
-    //this.currentDoctor.hospital=this.doctorService.consulterHospital(this.updateHosId);
-    this.doctorService.updateDoctor(this.currentDoctor);
-    this.router.navigate(['doctors']);
+    this.currentDoctor.hospital = this.hospitals.find(hos => hos.idHospital == this.updateHosId)!;
+    this.doctorService.updateDoctor(this.currentDoctor).subscribe(doc => {
+      this.router.navigate(['doctors']);
+    }
+  );
   }
 
 }

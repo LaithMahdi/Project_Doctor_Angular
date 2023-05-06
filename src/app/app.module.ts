@@ -8,13 +8,19 @@ import { AddDoctorComponent } from './add-doctor/add-doctor.component';
 import { FormsModule } from '@angular/forms';
 import { UpdateDoctorComponent } from './update-doctor/update-doctor.component';
 import { HttpClientModule } from '@angular/common/http';
+import { RechercheParHospitalComponent } from './recherche-par-hospital/recherche-par-hospital.component';
+import { RechercheParNameComponent } from './recherche-par-name/recherche-par-name.component';
+import { SearchFilterPipe } from './search-filter.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     DoctorsComponent,
     AddDoctorComponent,
-    UpdateDoctorComponent
+    UpdateDoctorComponent,
+    RechercheParHospitalComponent,
+    RechercheParNameComponent,
+    SearchFilterPipe,
   ],
   imports: [
     BrowserModule,

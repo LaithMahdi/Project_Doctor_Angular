@@ -1,0 +1,47 @@
+<div class="container mt-5">
+    <!-- <form class="form-inline">
+        <div class="form-group mx-sm-3 mb-2 mt-2 ">
+            <label>Nom Doctor en tapant : </label>
+            <input type="text" class="form-control" [(ngModel)]="nomDoctor" name="nomProduit" class="form-control">
+            <button type="submit" (click)="rechercherProds()" class="btn btn-primary mb-2 ml-2">Rechercher</button> 
+            <input class="form-control" #searchTerm (keyup)="onKeyUp(searchTerm.value)">
+        </div>
+    </form> -->
+
+    <form class="form-inline">
+        <div class="form-group mx-sm-3 mb-2 mt-2 ">
+            <label>Nom Produit en tapant : </label>
+            <input #nom [(ngModel)]="searchTerm" name="searchTerm" class="form-control">
+        </div>
+    </form>
+
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <table class="table table-striped">
+                <tr>
+                    <th>ID</th>
+                    <th>Name Doctor</th>
+                    <th>Age Doctor</th>
+                    <th>Service Doctor</th>
+                    <th>Date Of Recruitment</th>
+                    <th>Hospital</th>
+                </tr>
+                <!-- Cas of pipe filter  -->
+                <tbody *ngFor="let doctor of doctors  | searchFilter:searchTerm">
+
+
+                <!-- Cas of pipe search-filter  -->
+                <!-- <tbody *ngFor="let doctor of doctors  | filter:searchTerm"> -->
+                    <tr>
+                        <td>{{doctor.idDoctor}}</td>
+                        <td>{{doctor.nameDoctor}}</td>
+                        <td>{{doctor.ageDoctor}}</td>
+                        <td>{{doctor.serviceDoctor}}</td>
+                        <td>{{doctor.dateDoctor | date:'dd/MM/yyyy'}}</td>
+                        <td>{{doctor.hospital!.nameHospital}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,7 +1,5 @@
 export class Hospital{
     idHospital!:number;
-    nomHospital!:string;
-    typeHospital!:string;
+    nameHospital!:string;
     adresseHospital!:string;
-    dateCreation! : Date ;
 }
