@@ -5,14 +5,16 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 const httpOptions = {
-  headers: new HttpHeaders( {'Content-Type': 'application/json'} )
+  headers: new HttpHeaders( {'Content-Type': 'application/json','Access-Control-Allow-Origin':'*',
+})
 };
   
 @Injectable({
   providedIn: 'root'
 })
 export class DoctorService {
-  apiURL: string = 'http://localhost:8080/doctors_demo/api';
+  //apiURL: string = 'http://localhost:8080/doctors_demo/api';
+  apiURL: string ='http://localhost:8080/doctors/api';
 
   doctors! : Doctor[]; //un tableau de doctor
   //hospitals:Hospital[];
@@ -36,16 +38,17 @@ export class DoctorService {
   }
   
   ajouterDoctor(doctor: Doctor):Observable<Doctor>{
-    return this.http.post<Doctor>(this.apiURL, doctor, httpOptions);  
+    return this.http.post<Doctor>(this.apiURL,doctor,httpOptions);  
   }
 
-  supprimerDoctor(doctor: Doctor){
-    //supprimer le produit prod du tableau produits
-    const index = this.doctors.indexOf(doctor, 0);
-    if (index > -1) { 
-      this.doctors.splice(index,1);
-    }
+  supprimerDoctor(id: number){
+    const url=`${this.apiURL}/${id}`;
+    return this.http.delete(url,httpOptions);
   }
+  /* supprimerProduit(id : number) {
+const url = `${this.apiURL}/${id}`;
+return this.http.delete(url, httpOptions);
+}*/
 
   consulterDoctor(id:number): Doctor{
     return this.doctors.find(d=>d.idDoctor==id)!;
@@ -53,7 +56,6 @@ export class DoctorService {
 
   updateDoctor(doctor:Doctor)
   {
-    this.supprimerDoctor(doctor);
     this.ajouterDoctor(doctor);
     this.trierDoctors();
   }

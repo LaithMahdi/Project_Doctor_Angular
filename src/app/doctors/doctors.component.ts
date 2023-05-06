@@ -14,20 +14,32 @@ export class DoctorsComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.doctorService.listeDoctors().subscribe(docs=>{
-      //console.log(docs);
-      this.doctors=docs;
-    });      
+    this.chargerDoctors(); 
   }
+  chargerDoctors(){
+    // this.produitService.listeProduit().subscribe(prods => {
+    // console.log(prods);
+    // this.produits = prods;
+    // });
+    this.doctorService.listeDoctors().subscribe(docs=>{
+      console.log(docs);
+      this.doctors=docs;
+    });
+    }
 
   supprimerDoctor(d: Doctor)
   {
-    //console.log(d);
-    let conf = confirm("Etes-vous sûr ?");
-    if (conf)
-      this.doctorService.supprimerDoctor(d);
+  let conf = confirm("Etes-vous sûr ?");
+  if (conf)
+  /*this.produitService.supprimerProduit(p.idProduit).subscribe(() => {
+  console.log("produit supprimé");
+  this.chargerProduits();
+  });*/
+  this.doctorService.supprimerDoctor(d.idDoctor).subscribe(()=>{
+    console.log("doctor deleted");
+    this.chargerDoctors();
+  });
   }
-
   
 
 }
