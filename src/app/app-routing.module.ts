@@ -5,6 +5,7 @@ import { AddDoctorComponent } from './add-doctor/add-doctor.component';
 import { UpdateDoctorComponent } from './update-doctor/update-doctor.component';
 import { RechercheParHospitalComponent } from './recherche-par-hospital/recherche-par-hospital.component';
 import { RechercheParNameComponent } from './recherche-par-name/recherche-par-name.component';
+import { ListeHospitalsComponent } from './liste-hospitals/liste-hospitals.component';
 
 const routes: Routes = [
   {path: "doctors", component : DoctorsComponent},
@@ -13,6 +14,7 @@ const routes: Routes = [
   {path: "updateDoctor/:id", component: UpdateDoctorComponent},
   {path: "rechercheParHospital", component : RechercheParHospitalComponent},
   {path: "rechercheParName", component : RechercheParNameComponent},
+  {path: "listeHospitals", component : ListeHospitalsComponent},
 ];
 
 @NgModule({

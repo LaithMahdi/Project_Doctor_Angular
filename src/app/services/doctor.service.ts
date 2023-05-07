@@ -75,5 +75,8 @@ export class DoctorService {
     const url = `${apiURL}/docsByName/${nom}`;
     return this.http.get<Doctor[]>(url);
   }
-    
+  
+  ajouterHospital(hosp: Hospital):Observable<Hospital>{
+    return this.http.post<Hospital>(apiURLHos,hosp,httpOptions);
+  }
 }

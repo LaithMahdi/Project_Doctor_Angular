@@ -1,0 +1,21 @@
+<form>
+    <div [hidden]="ajout">
+        <label>ID Hospital</label>
+        <input type="text" [readonly]="!ajout" [(ngModel)]="hospital.idHospital" name="idHospital" class="form-control w-25">
+    </div>
+    <div>
+        <label>Name Hospital</label>
+        <input type="text" [(ngModel)]="hospital.nameHospital" name="nameHospital" class="form-control"
+            placeholder="Write the name of hospital...">
+    </div>
+    <div>
+        <label>Adress Hospital</label>
+        <input type="text" [(ngModel)]="hospital.adresseHospital" name="adresseHospital" class="form-control"
+            placeholder="Write the adress of hospital...">
+    </div>
+    <div class="mt-2">
+        <button type="submit" [disabled]="!hospital.nameHospital" class="btn btn-success"(click)="saveHospital()">
+            {{ajout ? 'Ajouter' : 'Modifier'}}
+        </button>
+    </div>
+</form>

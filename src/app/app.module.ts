@@ -11,6 +11,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { RechercheParHospitalComponent } from './recherche-par-hospital/recherche-par-hospital.component';
 import { RechercheParNameComponent } from './recherche-par-name/recherche-par-name.component';
 import { SearchFilterPipe } from './search-filter.pipe';
+import { ListeHospitalsComponent } from './liste-hospitals/liste-hospitals.component';
+import { UpdateHospitalComponent } from './update-hospital/update-hospital.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { SearchFilterPipe } from './search-filter.pipe';
     RechercheParHospitalComponent,
     RechercheParNameComponent,
     SearchFilterPipe,
+    ListeHospitalsComponent,
+    UpdateHospitalComponent,
   ],
   imports: [
     BrowserModule,
