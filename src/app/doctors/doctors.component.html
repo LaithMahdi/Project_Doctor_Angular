@@ -4,12 +4,12 @@
             <table class="table table-striped">
                 <tr>
                     <th>ID</th>
-                    <th>Name Doctor</th>
-                    <th>Age Doctor</th>
-                    <th>Service Doctor</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Service</th>
                     <th>Date Of Recruitment</th>
                     <th>Hospital</th>
-                    <th colspan="2">Actions</th>
+                    <th colspan="2" *ngIf="authService.isAdmin()">Actions</th>
                 </tr>
                 <tbody *ngFor="let doctor of doctors">
                     <tr>
@@ -18,9 +18,9 @@
                         <td>{{doctor.ageDoctor}}</td>
                         <td>{{doctor.serviceDoctor}}</td>
                         <td>{{doctor.dateDoctor | date:'dd/MM/yyyy'}}</td>
-                        <td>{{doctor.hospital!.nameHospital}}</td> 
-                        <td><a class="btn btn-danger" (click)="supprimerDoctor(doctor)">Supprimer</a></td>
-                        <td><a class="btn btn-success" [routerLink]="['/updateDoctor',doctor.idDoctor]">Modifier</a></td>
+                        <td>{{doctor.hospital!.nameHospital}}  ({{doctor.hospital!.adresseHospital}})</td> 
+                        <td><a *ngIf="authService.isAdmin()" class="btn btn-danger" (click)="supprimerDoctor(doctor)">Supprimer</a></td>
+                        <td><a *ngIf="authService.isAdmin()" class="btn btn-success" [routerLink]="['/updateDoctor',doctor.idDoctor]">Modifier</a></td>
                     </tr>
                 </tbody>
             </table>

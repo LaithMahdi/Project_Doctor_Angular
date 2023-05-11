@@ -13,6 +13,8 @@ import { RechercheParNameComponent } from './recherche-par-name/recherche-par-na
 import { SearchFilterPipe } from './search-filter.pipe';
 import { ListeHospitalsComponent } from './liste-hospitals/liste-hospitals.component';
 import { UpdateHospitalComponent } from './update-hospital/update-hospital.component';
+import { LoginComponent } from './login/login.component';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { UpdateHospitalComponent } from './update-hospital/update-hospital.compo
     SearchFilterPipe,
     ListeHospitalsComponent,
     UpdateHospitalComponent,
+    LoginComponent,
+    ForbiddenComponent,
   ],
   imports: [
     BrowserModule,

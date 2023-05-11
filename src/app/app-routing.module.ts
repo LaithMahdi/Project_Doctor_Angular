@@ -6,15 +6,22 @@ import { UpdateDoctorComponent } from './update-doctor/update-doctor.component';
 import { RechercheParHospitalComponent } from './recherche-par-hospital/recherche-par-hospital.component';
 import { RechercheParNameComponent } from './recherche-par-name/recherche-par-name.component';
 import { ListeHospitalsComponent } from './liste-hospitals/liste-hospitals.component';
+import { LoginComponent } from './login/login.component';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
+import { DoctorGuard } from './doctor.guard';
+
+
 
 const routes: Routes = [
   {path: "doctors", component : DoctorsComponent},
-  {path:"add-doctor",component:AddDoctorComponent},
+  {path:"add-doctor",component:AddDoctorComponent,canActivate:[DoctorGuard]},
   {path: "", redirectTo: "doctors", pathMatch: "full" },
   {path: "updateDoctor/:id", component: UpdateDoctorComponent},
   {path: "rechercheParHospital", component : RechercheParHospitalComponent},
   {path: "rechercheParName", component : RechercheParNameComponent},
   {path: "listeHospitals", component : ListeHospitalsComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'app-forbidden', component: ForbiddenComponent},
 ];
 
 @NgModule({

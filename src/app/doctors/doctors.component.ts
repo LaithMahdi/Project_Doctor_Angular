@@ -1,6 +1,7 @@
 import { DoctorService } from './../services/doctor.service';
 import { Component, OnInit } from '@angular/core';
 import { Doctor } from '../model/doctor.model';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-doctors',
@@ -9,18 +10,15 @@ import { Doctor } from '../model/doctor.model';
 export class DoctorsComponent implements OnInit{
   doctors? : Doctor[]; 
 
-  constructor(private doctorService:DoctorService){
-    //this.doctors=[];
-  }
+  constructor(
+    private doctorService:DoctorService,
+    public authService: AuthService,
+  ){}
 
   ngOnInit(): void {
     this.chargerDoctors(); 
   }
   chargerDoctors(){
-    // this.produitService.listeProduit().subscribe(prods => {
-    // console.log(prods);
-    // this.produits = prods;
-    // });
     this.doctorService.listeDoctors().subscribe(docs=>{
       console.log(docs);
       this.doctors=docs;
@@ -31,10 +29,6 @@ export class DoctorsComponent implements OnInit{
   {
   let conf = confirm("Etes-vous sûr ?");
   if (conf)
-  /*this.produitService.supprimerProduit(p.idProduit).subscribe(() => {
-  console.log("produit supprimé");
-  this.chargerProduits();
-  });*/
   this.doctorService.supprimerDoctor(d.idDoctor).subscribe(()=>{
     console.log("doctor deleted");
     this.chargerDoctors();
