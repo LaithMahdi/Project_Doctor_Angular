@@ -1,4 +1,5 @@
 import { Hospital } from "./hospital.model";
+import { Image } from "./image.model";
 
 export class Doctor{
     idDoctor!:number;
@@ -7,4 +8,7 @@ export class Doctor{
     serviceDoctor!:string;
     dateDoctor! : Date ;
     hospital!:Hospital;
+    image! : Image;
+    imageStr!:string;
+    images!: Image[];
 }

@@ -9,7 +9,9 @@
                     <th>Service</th>
                     <th>Date Of Recruitment</th>
                     <th>Hospital</th>
+                    <th>Image</th>
                     <th colspan="2" *ngIf="authService.isAdmin()">Actions</th>
+                    
                 </tr>
                 <tbody *ngFor="let doctor of doctors">
                     <tr>
@@ -18,9 +20,15 @@
                         <td>{{doctor.ageDoctor}}</td>
                         <td>{{doctor.serviceDoctor}}</td>
                         <td>{{doctor.dateDoctor | date:'dd/MM/yyyy'}}</td>
-                        <td>{{doctor.hospital!.nameHospital}}  ({{doctor.hospital!.adresseHospital}})</td> 
-                        <td><a *ngIf="authService.isAdmin()" class="btn btn-danger" (click)="supprimerDoctor(doctor)">Supprimer</a></td>
-                        <td><a *ngIf="authService.isAdmin()" class="btn btn-success" [routerLink]="['/updateDoctor',doctor.idDoctor]">Modifier</a></td>
+                        <td>{{doctor.hospital!.nameHospital}} ({{doctor.hospital!.adresseHospital}})</td>
+                        <td><img class="card-img-top img-responsive" src="{{apiurl+'/image/loadfromFS/'+doctor.idDoctor}}"
+                            style="height :70px;width:100px">
+                    </td>
+                        <td><a *ngIf="authService.isAdmin()" class="btn btn-danger"
+                                (click)="supprimerDoctor(doctor)">Supprimer</a></td>
+                        <td><a *ngIf="authService.isAdmin()" class="btn btn-success"
+                                [routerLink]="['/updateDoctor',doctor.idDoctor]">Modifier</a></td>
+                        
                     </tr>
                 </tbody>
             </table>

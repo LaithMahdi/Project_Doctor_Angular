@@ -13,10 +13,6 @@ export class RechercheParNameComponent implements OnInit{
   searchTerm!: string;
 
   ngOnInit(): void {
-    /*this.produitService.listeProduit().subscribe(prods => {
-      console.log(prods);
-      this.allProduits = prods;
-      });*/
     this.doctorService.listeDoctors().subscribe(docs=>{
       console.log(docs);
       // on a utilise pipe filte
