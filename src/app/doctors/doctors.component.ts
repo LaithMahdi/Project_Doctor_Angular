@@ -10,23 +10,28 @@ import { Image } from '../model/image.model';
 })
 export class DoctorsComponent implements OnInit {
   doctors?: Doctor[];
-  apiurl:string='http://localhost:8080/doctors/api';
+  apiurl: string = 'http://localhost:8080/doctors/api';
 
   constructor(
     private doctorService: DoctorService,
     public authService: AuthService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.chargerDoctors();
   }
 
-  chargerDoctors() {
-    this.doctorService.listeDoctors().subscribe((docs) => {
-      this.doctors = docs;
-    });
-  }
+  // 
 
+  chargerDoctors(){
+    this.doctorService.listeDoctors().subscribe(docs => {
+    this.doctors = docs;
+    this.doctors.forEach((doc) => {
+    doc.imageStr = 'data:' + doc.images[0].type + ';base64,' +
+    doc.images[0].image;
+    });
+    });
+    }
   supprimerDoctor(d: Doctor) {
     let conf = confirm('Etes-vous sûr ?');
     if (conf)

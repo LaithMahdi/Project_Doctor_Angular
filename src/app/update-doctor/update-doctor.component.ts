@@ -8,32 +8,47 @@ import { Image } from '../model/image.model';
 @Component({
   selector: 'app-update-doctor',
   templateUrl: './update-doctor.component.html',
-})
-export class UpdateDoctorComponent implements OnInit {
+}) export class UpdateDoctorComponent implements OnInit {
+
   currentDoctor = new Doctor();
-  myImage!: string;
   hospitals!: Hospital[];
-  updateHosId!: number;
+  updatedHosId!: number;
+  myImage!: string;
   uploadedImage!: File;
   isImageUpdated: Boolean = false;
 
-  constructor(
-    private activatedRoute: ActivatedRoute,
+  constructor(private activatedRoute: ActivatedRoute,
     private router: Router,
-    private doctorService: DoctorService
-  ) {}
+    private dctorService: DoctorService) { }
+
 
   ngOnInit(): void {
-    this.doctorService.listeHospitals().subscribe((hosps) => {
-      this.hospitals = hosps._embedded.hospitals;
-    });
-    this.doctorService
-      .consulterDoctor(this.activatedRoute.snapshot.params['id'])
-      .subscribe((doc) => {
+    this.dctorService.listeHospitals().
+      subscribe(hops => {
+        this.hospitals = hops._embedded.hospitals;
+      });
+    this.dctorService.consulterDoctor(this.activatedRoute.snapshot.params['id'])
+      .subscribe(doc => {
         this.currentDoctor = doc;
-        this.updateHosId = doc.hospital.idHospital;
+        this.updatedHosId = doc.hospital.idHospital;
       });
   }
+
+
+
+
+
+  updateDoctor() {
+    this.currentDoctor.hospital = this.hospitals.find(hop => hop.idHospital ==
+      this.updatedHosId)!;
+    this.dctorService
+      .updateDoctor(this.currentDoctor)
+      .subscribe((doc) => {
+        this.router.navigate(['doctors']);
+      });
+  }
+
+
 
   onImageUpload(event: any) {
     if (event.target.files && event.target.files.length) {
@@ -41,37 +56,22 @@ export class UpdateDoctorComponent implements OnInit {
       this.isImageUpdated = true;
       const reader = new FileReader();
       reader.readAsDataURL(this.uploadedImage);
-      reader.onload = () => {
-        this.myImage = reader.result as string;
-      };
+      reader.onload = () => { this.myImage = reader.result as string; };
     }
   }
 
-  updateDoctor() {
-    this.currentDoctor.hospital = this.hospitals.find(
-      (hosp) => hosp.idHospital == this.updateHosId
-    )!;
-    this.doctorService.updateDoctor(this.currentDoctor).subscribe((doc) => {
-      this.router.navigate(['doctors']);
-    });
-  }
   onAddImageDoctor() {
-    this.doctorService
-      .uploadImageDoc(
-        this.uploadedImage,
-        this.uploadedImage.name,
-        this.currentDoctor.idDoctor
-      )
+    this.dctorService
+      .uploadImageDoc(this.uploadedImage, this.uploadedImage.name, this.currentDoctor.idDoctor)
       .subscribe((img: Image) => {
         this.currentDoctor.images.push(img);
       });
   }
 
   supprimerImage(img: Image) {
-    let conf = confirm('Etes-vous sûr ?');
+    let conf = confirm("Etes-vous sûr ?");
     if (conf)
-      this.doctorService.supprimerImage(img.idImage).subscribe(() => {
-        //supprimer image du tableau currentProduit.images
+      this.dctorService.supprimerImage(img.idImage).subscribe(() => {
         const index = this.currentDoctor.images.indexOf(img, 0);
         if (index > -1) {
           this.currentDoctor.images.splice(index, 1);

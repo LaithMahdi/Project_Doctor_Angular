@@ -16,7 +16,8 @@ export class AddDoctorComponent implements OnInit {
   newIdHos!: number;
   uploadedImage!: File;
   imagePath: any;
-  constructor(private doctorService: DoctorService, private router: Router) {}
+
+  constructor(private doctorService: DoctorService, private router: Router) { }
 
   ngOnInit(): void {
     this.doctorService.listeHospitals().subscribe((hops) => {
@@ -25,28 +26,28 @@ export class AddDoctorComponent implements OnInit {
     });
   }
 
+
   addDoctor() {
-    this.newDoctor.hospital = this.hospitals.find(
-      (hosp) => hosp.idHospital == this.newIdHos
-    )!;
-    this.doctorService.ajouterDoctor(this.newDoctor).subscribe((doc) => {
-      this.doctorService
-        .uploadImageFS(
-          this.uploadedImage,
-          this.uploadedImage.name,
-          doc.idDoctor
-        )
-        .subscribe((response: any) => {});
-      this.router.navigate(['doctors']);
-    });
+    this.doctorService
+      .uploadImage(this.uploadedImage, this.uploadedImage.name)
+      .subscribe((img: Image) => {
+        this.newDoctor.image = img;
+        this.newDoctor.hospital = this.hospitals.find(hos => hos.idHospital
+          == this.newIdHos)!;
+        this.doctorService
+          .ajouterDoctor(this.newDoctor)
+          .subscribe(() => {
+            console.log(this.newDoctor);
+            this.router.navigate(['doctors']);
+          });
+      });
   }
 
   onImageUpload(event: any) {
     this.uploadedImage = event.target.files[0];
     var reader = new FileReader();
     reader.readAsDataURL(this.uploadedImage);
-    reader.onload = (_event) => {
-      this.imagePath = reader.result;
-    };
+    reader.onload = (_event) => { this.imagePath = reader.result; }
   }
+
 }

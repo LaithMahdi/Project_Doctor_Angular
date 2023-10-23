@@ -26,7 +26,7 @@
         </div>
         <div class="col-sm-4 col-md-4 col-lg-4">
             <label>Hospital</label>
-            <select class="form-control form-control-lg" id="idHospital" name="idHospital" [(ngModel)]="updateHosId">
+            <select class="form-control form-control-lg" id="idHospital" name="idHospital" [(ngModel)]="updatedHosId">
                 <option *ngFor="let hos of hospitals" [value]="hos.idHospital">
                     {{hos.nameHospital}}
                 </option>
@@ -37,7 +37,8 @@
             <input type="file" (change)="onImageUpload($event)" class="form-control">
         </div>
         <div class="mt-2">
-            <button type="submit" (click)="onAddImageDoctor()" class="btn btn-success">Ajouter Image</button>
+            <button type="submit" (click)="onAddImageDoctor()" class="btn
+            btn-success">Ajouter Image</button>
         </div>
 
         <div class="col-sm-16 col-md-16 col-lg-16">
@@ -55,9 +56,9 @@
                         <tr>
                             <td><img class="card-img-top img-responsive"
                                     src="{{'data:' + img.type + ';base64,' + img.image}}"
-                                    style="height :70px;width:100px"></td>
-                            <td style="width:20%" ><a class="btn btn-danger" (click)="supprimerImage(img)">Supprimer</a></td>
-                                    
+                                    style="height :50px;width:100px"></td>
+                                    <td style="width:20%" ><a class="btn btn-danger"
+                                        (click)="supprimerImage(img)">Supprimer</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -68,3 +69,4 @@
         </div>
     </form>
 </div>
+{{ currentDoctor | json }}
