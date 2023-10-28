@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<div class="container">
     <div class="row justify-content-md-center">
         <div class="col-md-4">
             <div class="alert alert-danger" *ngIf="err==1">
@@ -16,6 +16,9 @@
                 <div class="row justify-content-md-center">
                     <button type="button" (click)="onLoggedin()" class="btn btn-success">Connexion</button>
                 </div>
+
+                <p class="m-2"> you don't have an account to login <span>Create le </span>
+                </p>
             </form>
         </div>
     </div>

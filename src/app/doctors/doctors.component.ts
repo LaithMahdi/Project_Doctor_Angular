@@ -21,8 +21,6 @@ export class DoctorsComponent implements OnInit {
     this.chargerDoctors();
   }
 
-  // 
-
   chargerDoctors(){
     this.doctorService.listeDoctors().subscribe(docs => {
     this.doctors = docs;
@@ -32,10 +30,10 @@ export class DoctorsComponent implements OnInit {
     });
     });
     }
-  supprimerDoctor(d: Doctor) {
+  supprimerDoctor(doctor: Doctor) {
     let conf = confirm('Etes-vous sûr ?');
     if (conf)
-      this.doctorService.supprimerDoctor(d.idDoctor).subscribe(() => {
+      this.doctorService.supprimerDoctor(doctor.idDoctor).subscribe(() => {
         console.log('doctor deleted');
         this.chargerDoctors();
       });

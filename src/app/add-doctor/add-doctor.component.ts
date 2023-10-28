@@ -28,19 +28,20 @@ export class AddDoctorComponent implements OnInit {
 
 
   addDoctor() {
-    this.doctorService
-      .uploadImage(this.uploadedImage, this.uploadedImage.name)
-      .subscribe((img: Image) => {
-        this.newDoctor.image = img;
-        this.newDoctor.hospital = this.hospitals.find(hos => hos.idHospital
-          == this.newIdHos)!;
-        this.doctorService
-          .ajouterDoctor(this.newDoctor)
-          .subscribe(() => {
+    this.newDoctor.hospital = this.hospitals.find(hos => hos.idHospital
+      = this.newIdHos)!;
+    this.doctorService.ajouterDoctor(this.newDoctor).subscribe((createdDoctor: Doctor) => {
+
+      this.newDoctor = createdDoctor;
+      this.doctorService.uploadImageDoc(this.uploadedImage, this.uploadedImage.name, this.newDoctor.idDoctor)
+        .subscribe((img: Image) => {
+          this.newDoctor.image = img;
+          this.doctorService.updateDoctor(this.newDoctor).subscribe(() => {
             console.log(this.newDoctor);
             this.router.navigate(['doctors']);
           });
-      });
+        });
+    });
   }
 
   onImageUpload(event: any) {
