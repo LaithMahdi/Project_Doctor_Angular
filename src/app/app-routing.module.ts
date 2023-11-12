@@ -9,6 +9,7 @@ import { ListeHospitalsComponent } from './liste-hospitals/liste-hospitals.compo
 import { LoginComponent } from './login/login.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { DoctorGuard } from './doctor.guard';
+import { RegisterComponent } from './register/register.component';
 
 
 
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path: "listeHospitals", component : ListeHospitalsComponent},
   {path: 'login', component: LoginComponent},
   {path: 'app-forbidden', component: ForbiddenComponent},
+  {path: 'register', component: RegisterComponent},
 ];
 
 @NgModule({

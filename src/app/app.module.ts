@@ -15,6 +15,7 @@ import { UpdateHospitalComponent } from './update-hospital/update-hospital.compo
 import { LoginComponent } from './login/login.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { TokenInterceptor } from './services/token.interceptor';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { TokenInterceptor } from './services/token.interceptor';
     UpdateHospitalComponent,
     LoginComponent,
     ForbiddenComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
