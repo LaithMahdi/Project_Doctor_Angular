@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../model/user.model';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { VerifyCodeComponent } from '../verify-code/verify-code.component';
 
 @Component({
   selector: 'app-register',
@@ -24,26 +25,16 @@ export class RegisterComponent implements OnInit {
   register() {
     this.authService.register(this.user).subscribe({
       next : (data)=>{
-        this.success=1;
+        //this.success=1;
         console.log(JSON.stringify(data));
+        this.router.navigate(['/verify-code'], {
+          queryParams: { email: this.user.email },
+        });
       },error:(err:any)=>{
         this.err = 1; 
         console.error('register failed:', err);
       }
     });
   }
-  /** 
-  onLoggedin(){
-    this.authService.login(this.user).subscribe({
-      next: (data) => {
-        let jwToken = data.headers.get('Authorization')!;
-        this.authService.saveToken(jwToken);
-        this.router.navigate(['/']); 
-      },
-      error: (err: any) => {
-        this.err = 1; 
-      }
-      }
-    );     
-  } */
+
 }

@@ -16,6 +16,7 @@ import { LoginComponent } from './login/login.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { TokenInterceptor } from './services/token.interceptor';
 import { RegisterComponent } from './register/register.component';
+import { VerifyCodeComponent } from './verify-code/verify-code.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { RegisterComponent } from './register/register.component';
     LoginComponent,
     ForbiddenComponent,
     RegisterComponent,
+    VerifyCodeComponent,
   ],
   imports: [
     BrowserModule,
