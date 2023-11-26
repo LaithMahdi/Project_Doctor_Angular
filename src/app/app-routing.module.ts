@@ -10,7 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { DoctorGuard } from './doctor.guard';
 import { RegisterComponent } from './register/register.component';
-import { VerifyCodeComponent } from './verify-code/verify-code.component';
+
 
 
 
@@ -25,7 +25,6 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'app-forbidden', component: ForbiddenComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'verify-code', component: VerifyCodeComponent},
 ];
 
 @NgModule({

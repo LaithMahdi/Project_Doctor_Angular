@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../model/user.model';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
-import { VerifyCodeComponent } from '../verify-code/verify-code.component';
 
 @Component({
   selector: 'app-register',
@@ -11,30 +10,70 @@ import { VerifyCodeComponent } from '../verify-code/verify-code.component';
 })
 export class RegisterComponent implements OnInit {
   user = new User();
-  err:number = 0;
-  success:number = 0;
-  constructor(
-    private authService : AuthService,
-    private router: Router,
-  ) {
-    
-   }
+ 
+  confirmPassword: string = '';
+  code: number=0 ;
+  err: number = 0;
+  verif: boolean = false;
+  constructor(private authService: AuthService, private router: Router) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
+
   register() {
+    
+    if (this.user.password !== this.confirmPassword) {
+      this.err = 2;
+      return;
+    }
+
+
     this.authService.register(this.user).subscribe({
-      next : (data)=>{
-        //this.success=1;
-        console.log(JSON.stringify(data));
-        this.router.navigate(['/verify-code'], {
-          queryParams: { email: this.user.email },
-        });
-      },error:(err:any)=>{
-        this.err = 1; 
+      next: (response: any) => {
+        console.log("response from register", response);
+        if (response.status === 'success') {
+          this.verif = true;
+        } else {
+  
+          this.err = 1;  
+        }
+      },
+      error: (err: any) => {
+        this.err = 1;
         console.error('register failed:', err);
-      }
+      },
+    });
+    
+  }
+
+
+  verifyCode() {
+
+    this.authService.checkVerifyCode(this.user.email, this.code).subscribe({
+      next: (response: any) => {
+        if (response.status === 'success') {
+      
+          this.authService.login(this.user).subscribe({
+            next: (data) => {
+              let jwToken = data.headers.get('Authorization')!;
+              this.authService.saveToken(jwToken);
+              this.router.navigate(['/']); 
+            },
+            error: (err: any) => {
+              console.log(err);
+              this.err = 1; 
+            }
+            }
+          ); 
+        } else {
+          this.err = 1;
+        }
+      },
+      error: (err: any) => {
+        this.err = 4;  
+        console.error('Verification failed:', err);
+      },
     });
   }
-
+  
+  
 }
